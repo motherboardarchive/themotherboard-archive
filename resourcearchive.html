@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Homepage</title>
+    <style>
+        @font-face {
+            font-family: 'Inconsolata';
+            src: url('Inconsolata-VariableFont_wdth,wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html {
+            height: 100%; /* Ensure the html element spans full height */
+        }
+        body {
+            background-color: #ebddf7; /* Very pale lilac background */
+            text-align: center; /* Center text */
+            font-family: 'Inconsolata', monospace; /* Use Inconsolata as the primary font */
+            color: white; /* Make all text white */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack elements vertically */
+            min-height: 100vh; /* Minimum height of viewport */
+        }
+        header {
+            background-color: #ffa8c8; /* Pastel purple background */
+            padding: 10px 0; /* Padding for spacing */
+            color: #f1acc2; /* Black text for visibility */
+            border-bottom: 3pt solid #aa99d0; /* Black bottom border */
+        }
+        footer {
+            background-color: #ffa8c8; /* Pastel pink background */
+            padding: 10px 0; /* Padding for spacing */
+            color: #000; /* Black text for visibility */
+            margin-top: auto; /* Push footer to the bottom */
+        }
+        nav {
+            margin-top: 20px; /* Adjust if necessary */
+        }
+        a {
+            color: #000; /* Dark text for better visibility */
+            text-decoration: none; /* No underline */
+            margin: 0 10px; /* Spacing around links */
+            display: inline-block;
+            background-color: #ffffff; /* White background */
+            color: black; /* Black text */
+            padding: 10px 20px; /* Padding inside the button */
+            border: 1pt solid black; /* Black border */
+            border-radius: 30px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Larger font size */
+            margin-top: 20px; /* Margin above the button for spacing */
+        }
+        a:hover {
+            background-color: #ec95be; /* Lighter pink on hover */
+        }
+        .text-bubble {
+            display: inline-block;
+            background-color: #ffffff;
+            border: pt solid black; /* Added black border */
+            border-radius: 20px;
+            padding: 0px;
+            color: #000;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="color: #f1acc2; text-decoration: none;"> <!-- Link to index.html with style adjustments -->
+            <h1 class="text-bubble">the MotherBoard archive</h1>
+        </a>
+    </header>
+    
+    <nav>
+        <a href="ABOUT.html">about</a>
+        <a href="resourcearchive.html">resource archive</a>
+        <a href="sophie.html">quiz</a>
+        <a href="mailboxarchive.html">mailbox archive</a>
+    </nav>
+    <h2 style="color: black;">resource archive</h2>
+    <footer>
+        © 2024 the MotherBoard archive
+    </footer>
+</body>
+</html>

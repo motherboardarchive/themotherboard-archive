@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #choices {
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz</h1>
+    <div id="question"></div>
+    <div id="choices"></div>
+    <button id="submit">Submit Answer</button>
+    <div id="result"></div>
+    <div id="image-recommendations"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "do you identify as a woman?",
+        choices: [{ text: "yes", code: "01" }, { text: "no", code: "02" }]
+      },
+      {
+        question: "do you enjoy coming-of-age stories?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "are you dealing with the loss of a mother or mother figure?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "do you struggle coming to terms with the way things are in your current life regarding your relationship with your parent(s)/child?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "are you curious to reflect on how your parental relationships affect your relationships with others?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "would you classify your relationship with your parent(s) as particularly complex and tumultuous?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "does media that contains spiritual or religious perspectives turn you off?",
+        choices: [{ text: "yes", code: "01" }, { text: "no", code: "02" }]
+      },{
+        question: "growing up, do you feel as though you dealt with having to “walk on eggshells” or that the success of your relationship between you and your guardians depended on how “good” you were?",
+        choices: [{ text: "yes", code: "01" }, { text: "no", code: "02" }]
+      },{
+        question: "have you ever dealt with moving away from your mother/family? (leaving home for school, moving states, etc?)",
+        choices: [{ text: "yes", code: "01" }, { text: "no", code: "02" }]
+      },
+      {
+        question: "is improving your communication with your mother important to you?",
+        choices: [{ text: "yes", code: "01" }, { text: "n/a", code: "02" }]
+      },
+      
+      // Add more questions as needed
+    ];
+
+    const allRecommendations = [
+      { url: "1.jpeg", criteria: ["01", "05"] },
+      { url: "2.jpg", criteria: ["02", "06"] },
+      { url: "3.jpg", criteria: ["01", "06"] },
+      { url: "4.jpg", criteria: ["01", "08"] },
+      { url: "5.jpg", criteria: ["01", "08"] },
+      { url: "6.jpg", criteria: ["01", "08"] },
+      { url: "7.jpg", criteria: ["01", "08"] },
+      { url: "8.jpg", criteria: ["01", "08"] },
+      { url: "9.jpg", criteria: ["01", "08"] },
+      { url: "10.jpg", criteria: ["01", "08"] },
+      { url: "11.jpg", criteria: ["01", "08"] },
+      { url: "12.jpg", criteria: ["01", "08"] },
+      { url: "13.jpg", criteria: ["01", "08"] },
+      { url: "14.jpg", criteria: ["01", "08"] },
+      { url: "15.jpg", criteria: ["01", "08"] },
+      { url: "16.jpg", criteria: ["01", "08"] },
+      { url: "17.jpg", criteria: ["01", "08"] },
+      { url: "18.jpg", criteria: ["01", "08"] },
+      { url: "19.jpg", criteria: ["01", "08"] },
+      { url: "20.jpg", criteria: ["01", "08"] },
+      { url: "21.jpg", criteria: ["01", "08"] },
+      { url: "22.jpg", criteria: ["01", "08"] },
+      { url: "23.jpg", criteria: ["01", "08"] },
+      { url: "24.jpg", criteria: ["01", "08"] },
+      { url: "25.jpg", criteria: ["01", "08"] },
+      { url: "26.jpg", criteria: ["01", "08"] },
+      { url: "27.jpeg", criteria: ["01", "08"] },
+      { url: "28.jpg", criteria: ["01", "08"] },
+      // Add more image URLs with their criteria
+    ];
+
+    let currentQuestion = 0;
+    let answers = [];
+    let currentRecommendations = allRecommendations.slice(); // Start with all recommendations
+
+    const questionElement = document.getElementById('question');
+    const choicesElement = document.getElementById('choices');
+    const resultElement = document.getElementById('result');
+    const submitButton = document.getElementById('submit');
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      questionElement.textContent = question.question;
+      choicesElement.innerHTML = '';
+      question.choices.forEach(choice => {
+        const button = document.createElement('button');
+        button.textContent = choice.text;
+        button.addEventListener('click', () => answerQuestion(choice.code));
+        choicesElement.appendChild(button);
+      });
+    }
+
+    function answerQuestion(choiceCode) {
+      answers.push(choiceCode);
+      filterRecommendations();
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function filterRecommendations() {
+      currentRecommendations = currentRecommendations.filter(rec =>
+        rec.criteria.slice(0, answers.length).includes(answers[answers.length - 1])
+      );
+      updateResultDisplay();
+    }
+
+    function updateResultDisplay() {
+      const imageContainer = document.getElementById('image-recommendations');
+      imageContainer.innerHTML = ''; // Clear previous images
+      currentRecommendations.forEach(rec => {
+        const img = document.createElement('img');
+        img.src = rec.url;
+        img.alt = 'Recommendation';
+        img.style.height = '200px'; // Set image size as needed
+        img.style.margin = '10px';
+        imageContainer.appendChild(img);
+      });
+    }
+
+    function showResult() {
+      updateResultDisplay(); // Show final recommendations
+    }
+
+    submitButton.addEventListener('click', () => answerQuestion(questions[currentQuestion].choices[0].code));
+    showQuestion();
+  </script>
+</body>
+</html>
