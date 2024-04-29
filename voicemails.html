@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Homepage</title>
+    <style>
+        @font-face {
+            font-family: 'Inconsolata';
+            src: url('Inconsolata-VariableFont_wdth,wght.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html {
+            height: 100%; /* Ensure the html element spans full height */
+        }
+        body {
+            background-color: #ebddf7; /* Very pale lilac background */
+            text-align: center; /* Center text */
+            font-family: 'Inconsolata', monospace; /* Use Inconsolata as the primary font */
+            color: white; /* Make all text white */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack elements vertically */
+            min-height: 100vh; /* Minimum height of viewport */
+        }
+        header {
+            background-color: #ffa8c8; /* Pastel purple background */
+            padding: 10px 0; /* Padding for spacing */
+            color: #f1acc2; /* Black text for visibility */
+            border-bottom: 3pt solid #aa99d0; /* Black bottom border */
+        }
+        footer {
+            background-color: #ffa8c8; /* Pastel pink background */
+            padding: 10px 0; /* Padding for spacing */
+            color: #000; /* Black text for visibility */
+            margin-top: auto; /* Push footer to the bottom */
+        }
+        nav {
+            margin-top: 20px; /* Adjust if necessary */
+        }
+        a {
+            color: #000; /* Dark text for better visibility */
+            text-decoration: none; /* No underline */
+            margin: 0 10px; /* Spacing around links */
+            display: inline-block;
+            background-color: #ffffff; /* White background */
+            color: black; /* Black text */
+            padding: 10px 20px; /* Padding inside the button */
+            border: 1pt solid black; /* Black border */
+            border-radius: 30px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Larger font size */
+            margin-top: 20px; /* Margin above the button for spacing */
+        }
+        a:hover {
+            background-color: #ec95be; /* Lighter pink on hover */
+        }
+        .text-bubble {
+            display: inline-block;
+            background-color: #ffffff;
+            border: pt solid black; /* Added black border */
+            border-radius: 20px;
+            padding: 0px;
+            color: #000;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .transcript-btn {
+            margin-top: 10px; /* Adjust spacing */
+            color: black; /* Black text */
+            background-color: white; /* White background */
+            border: 1pt solid black; /* Black border */
+            border-radius: 30px; /* Rounded corners */
+            padding: 10px; /* Padding inside the text bubble */
+            display: inline-block; /* Make the text bubble inline */
+            cursor: pointer; /* Pointer cursor */
+        }
+        .transcript-desc {
+            margin-top: 10px; /* Adjust spacing */
+            color: black; /* Black text */
+            background-color: white; /* White background */
+            border: 1pt solid black; /* Black border */
+            border-radius: 30px; /* Rounded corners */
+            padding: 10px; /* Padding inside the text bubble */
+            display: none; /* Initially hidden */
+        }
+        .submenu {
+            margin-top: 10px; /* Adjust spacing */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" style="color: #f1acc2; text-decoration: none;"> <!-- Link to index.html with style adjustments -->
+            <h1 class="text-bubble">the MotherBoard archive</h1>
+        </a>
+    </header>
+    
+    <nav>
+        <a href="ABOUT.html">about</a>
+        <a href="resourcearchive.html">resource archive</a>
+        <a href="sophie.html">quiz</a>
+        <a href="mailboxarchive.html">mailbox archive</a>
+    </nav>
+
+    <!-- Sub-menu -->
+    <div class="submenu">
+        <a href="voicemails.html">voicemails</a>
+        <a href="textsmessages.html">texts</a>
+        <a href="survey.html">survey responses</a>
+        <a href="tiktokvideos.html">tiktoks</a>
+    </div>
+
+    <h2 style="color: black;">mailbox archive</h2>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_159_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button class="transcript-btn" onclick="toggleTranscript('transcript1')">Transcript</button>
+        <p id="transcript1" class="transcript-desc">(Submitted Apr 12, 2024, 1:59 P.M.) Transcript: "I think this is how you know you send message but I wish that my mom knew that she is the only person on planet Earth was capable of making me feel. That I am not even more full of enough. I will never be enough I could never be enough. And I just want to ask her. What about me makes me not good enough. What about me? Makes you not want to try to make me feel good enough. and why do you have so much resentment for the life that you so badly wanted to create and why? Is your life before me? Why? Damage Done unto you in the life before me Why do I have to bear the consequences? Why do you not acknowledge the consequences? That are affected me. Why do you not acknowledge the hurt or pain or resentment that you have caused me? Why have you not acknowledged a single things done to me? Why have you been so nasty and yet to see how nasty you can be? Thanks."</p>
+    </div>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_204_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button class="transcript-btn" onclick="toggleTranscript('transcript2')">Transcript</button>
+        <p id="transcript2" class="transcript-desc">(Submitted Apr 12, 2024, 2:04 P.M.) Transcript: "I wish I could tell my mom. That I left not because I don't love her. but because I had to love myself more."</p>
+    </div>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_215_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button class="transcript-btn" onclick="toggleTranscript('transcript3')">Transcript</button>
+        <p id="transcript3" class="transcript-desc">(Submitted Apr 12, 2024, 2:15 P.M.) Transcript: "I wish I could tell you you only have one life and one set of kids. And you need to leave that man behind if you want to experience either of those things while you're still here with us."</p>
+    </div>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_234_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p class="transcript">(Submitted Apr 12, 2024, 2:34 P.M.) Transcript: "    </div>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_242_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p class="transcript">(Submitted Apr 12, 2024, 2:42 P.M.) Transcript: "I guess I just want to say that I wish I could have. been there when you were growing up. I just have this really strong urge to go back in time and meet you when you are for 5 years old and just hold you. I wish I could have told your dad to be nicer to you. and I wish I could have followed you into high school and become your best friend because I know we would have gotten along. I wish I could have protected you. from high school boys one in particular so we would have one last shared experience. I I know we would have been. good friends and I wish I could have had somebody like you around when I was going through my hardest time and we could have shared those things. And I love you."</p>
+    </div>
+
+    <div>
+        <audio controls>
+            <source src="Voicemail_243_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p class="transcript">(Submitted Apr 12, 2024, 2:43 P.M.) Transcript: "I wish she never had me."   </div>
+
+    <div>
+ <div>
+            <audio controls>
+                <source src="voicemail_300_41224.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="transcript">(Submitted Apr 12, 2024, 3:00 P.M.) Transcript: "when you said that you love me. But you never liked me. It completely broke me."    </div>
+    
+  <div>
+
+ <div>
+                <audio controls>
+                    <source src="Voicemail_302_41224.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="transcript">(Submitted Apr 12, 2024, 3:02 P.M.) Transcript: "Hey. I'm ever since you died. when I was 13 I'm 20 now. Probably from 13 to 17. I thought I had it all figured out. And now being 20 years old. I just wanted to let you know that. I have no idea what I'm doing with my life. and I just feel like I've been asked. You never got to see me graduate. You'll never get to see me get married. I'm in school and full time and I go to work full time and I have a plan, but I don't know what I'm doing. I'm nowhere near the age. That you were when you had me. so I'm hoping that it'll all be figured out by then. I miss you so much. And I love you so much. Bye."    </div>
+        
+            <div>
+
+                <div>
+                    <audio controls>
+                        <source src="Voicemail_303_41224.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="transcript">(Submitted Apr 12, 2024, 3:03 P.M.) Transcript: "but I resent my mother so much for not making my brother's be nice to me. I can understand if they didn't like who I was as a person or didn't want to hang out with me, but at the bare minimum. She could have made them be nice to me and I could have had that. Protection I guess I always wish I had that like movie brother s*** where it's like my brother is going to beat you up. But she had a good relationship with her brothers, but I don't know. I think she felt burdened by being a woman. And so she doesn't and like want men to be nice or some s*** like that. I don't know. She doesn't anticipate them to be nice or expect them to be nice. or expect anything of them so she just Goes belly up and I'm not like that at all. So I wish you would like that. Thank you. Have a good one. Happy graduation."    </div>
+            
+  <div>
+    <div>
+        <audio controls>
+            <source src="Voicemail_307_41224.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p class="transcript">(Submitted Apr 12, 2024, 3:07 P.M.) Transcript: "I'm going to want to say Mom. It really hurt when you would say that you wished it was you instead of Dad. But what hurt more with? the fact that I agreed sometimes I feel guilty about that a lot."    </div>
+
+    <div>
+        <div>
+            <audio controls>
+                <source src="Voicemail_307a_41224.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="transcript">(Submitted Apr 12, 2024, 3:07 P.M.) Transcript: "Hi. My name is B. I wish I I wish I could have told my mom. That I was sorry. I didn't say happy Mother's Day to her. Before she passed away. I also wish I could have. Told her I was trans before she passed away. I miss her a lot. She moved across the country with me though. And now she's up on a Shelf with all of my anime figures. I hope this helps you with your project and I hope you have a great day. What you're doing is really great. Thank you."    </div>
+    
+        <div>
+ <div>
+            <audio controls>
+                <source src="Voicemail_309_41224.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "Hi, Mom. I love you. And I miss you. and I'm just scared to grow up and sometimes I wish. That you were here. Just to hold my hand. I love you. and I'm I don't see you soon. I hope you're having a good day, and I love you. Thank you."   </div>
+    
+        <div>
+            <div>
+                <audio controls>
+                    <source src="Voicemail.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+        
+            <div>
+                <div>
+                    <audio controls>
+                        <source src="Voicemail.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+            
+                <div>
+                    <div>
+                        <audio controls>
+                            <source src="Voicemail4.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+                
+                    <div>
+      <div>
+            <div>
+                <audio controls>
+                    <source src="Voicemail.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+        
+            <div>
+                <div>
+                    <audio controls>
+                        <source src="Voicemail.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+            
+                <div>
+                    <div>
+                        <audio controls>
+                            <source src="Voicemail4.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p class="transcript">(Submitted Apr 12, 2024, 3:09 P.M.) Transcript: "    </div>
+                
+                    <div><footer>
+    © 2024 the MotherBoard archive
+    <footer>
+        © 2024 the MotherBoard archive
+    </footer>
+
+    <script>
+        function toggleTranscript(transcriptId) {
+            var transcript = document.getElementById(transcriptId);
+            transcript.style.display = transcript.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+</html>

@@ -11,81 +11,138 @@
             font-style: normal;
         }
         html {
-            height: 100%; /* Ensure the html element spans full height */
+            height: 100%;
         }
         body {
-            background-color: #ebddf7; /* Very pale lilac background */
-            text-align: center; /* Center text */
-            font-family: 'Inconsolata', monospace; /* Use Inconsolata as the primary font */
-            color: white; /* Make all text white */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            display: flex; /* Use flexbox layout */
-            flex-direction: column; /* Stack elements vertically */
-            min-height: 100vh; /* Minimum height of viewport */
+            background-color: #ebddf7;
+            text-align: center;
+            font-family: 'Inconsolata', monospace;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
-            background-color: #ffa8c8; /* Pastel purple background */
-            padding: 10px 0; /* Padding for spacing */
-            color: #f1acc2; /* Black text for visibility */
-            border-bottom: 3pt solid #aa99d0; /* Black bottom border */
+            background-color: #ffa8c8;
+            padding: 10px 0;
+            color: #f1acc2;
+            border-bottom: 3pt solid #aa99d0;
         }
         footer {
-            background-color: #ffa8c8; /* Pastel pink background */
-            padding: 10px 0; /* Padding for spacing */
-            color: #000; /* Black text for visibility */
-            margin-top: auto; /* Push footer to the bottom */
+            background-color: #ffa8c8;
+            padding: 10px 0;
+            color: #000;
+            margin-top: auto;
         }
         nav {
-            margin-top: 20px; /* Adjust if necessary */
+            margin-top: 10px;
         }
         a {
-            color: #000; /* Dark text for better visibility */
-            text-decoration: none; /* No underline */
-            margin: 0 10px; /* Spacing around links */
+            color: #000;
+            text-decoration: none;
+            margin: 0 10px;
             display: inline-block;
-            background-color: #ffffff; /* White background */
-            color: black; /* Black text */
-            padding: 10px 20px; /* Padding inside the button */
-            border: 1pt solid black; /* Black border */
-            border-radius: 30px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor on hover */
-            font-size: 16px; /* Larger font size */
-            margin-top: 20px; /* Margin above the button for spacing */
+            background-color: #ffffff;
+            color: black;
+            padding: 10px 20px;
+            border: 1pt solid black;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
         }
         a:hover {
-            background-color: #ec95be; /* Lighter pink on hover */
+            background-color: #ec95be;
         }
         .text-bubble {
             display: inline-block;
             background-color: #ffffff;
-            border: pt solid black; /* Added black border */
+            border: pt solid black;
             border-radius: 20px;
             padding: 0px;
             color: #000;
             margin-top: 0;
             margin-bottom: 0;
         }
+        #welcome-text {
+            margin-top: 220px;
+        }
+        #typed-text {
+            display: inline;
+            background-color: #ec95be;
+            color: black;
+            padding: 0 15px;
+            border-radius: 15px;
+            font-size: 32pt; /* Changed font size to 18pt */
+        }
+        .bg-image {
+            position: fixed;
+            top: 50%;  /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust position to be centered */
+            width: 4in; /* Fixed width of 4 inches */
+            height: 4in; /* Fixed height of 4 inches */
+            background: no-repeat center center;
+            background-size: cover; /* Cover the defined area */
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
+    <div class="bg-image" id="backgroundImage"></div>
     <header>
-        <a href="index.html" style="color: #f1acc2; text-decoration: none;"> <!-- Link to index.html with style adjustments -->
+        <a href="index.html" style="color: #f1acc2; text-decoration: none;">
             <h1 class="text-bubble">the MotherBoard archive</h1>
         </a>
     </header>
-    
     <nav>
         <a href="ABOUT.html">about</a>
         <a href="resourcearchive.html">resource archive</a>
         <a href="sophie.html">quiz</a>
         <a href="mailboxarchive.html">mailbox archive</a>
     </nav>
-
-    <h2 style="color: black;">welcome</h2><!-- Added "Welcome" subheader with black text -->
-  
+    <h2 id="welcome-text" style="color: black;"><span id="typed-text" style="font-size: 18pt;"></span></h2>
     <footer>
         © 2024 the MotherBoard archive
     </footer>
+    <script>
+        function typeWriter(text, i, fnCallback) {
+            if (i < text.length) {
+                document.getElementById("typed-text").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i, fnCallback)
+                }, 100);
+            } else if (typeof fnCallback == "function") {
+                setTimeout(fnCallback, 700);
+            }
+        }
+
+        window.onload = function() {
+            var text = "welcome to the MotherBoard archive...";
+            typeWriter(text, 0, function() {});
+        };
+
+        document.body.addEventListener('mouseover', function() {
+            document.getElementById('backgroundImage').style.opacity = 1;
+            document.getElementById('backgroundImage').style.backgroundImage = 'url(' + getRandomImage() + ')';
+        });
+
+        document.body.addEventListener('mouseout', function() {
+            document.getElementById('backgroundImage').style.opacity = 0;
+        });
+
+        function getRandomImage() {
+            const images = [
+                "books.gif"
+            ];
+            return images[Math.floor(Math.random() * images.length)];
+        }
+    </script>
 </body>
 </html>
