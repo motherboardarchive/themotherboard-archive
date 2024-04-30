@@ -46,7 +46,7 @@
             display: inline-block;
             background-color: #ffffff; /* White background */
             color: black; /* Black text */
-            padding: 10px 20px; /* Padding inside the button */
+            padding: 10px 10px; /* Padding inside the button */
             border: 1pt solid black; /* Black border */
             border-radius: 30px; /* Rounded corners */
             cursor: pointer; /* Pointer cursor on hover */
@@ -59,38 +59,65 @@
         .text-bubble {
             display: inline-block;
             background-color: #ffffff;
-            border: pt solid black; /* Added black border */
-            border-radius: 20px;
-            padding: 0px;
+            border: 1pt solid black; /* Added black border */
+            border-radius: 30px;
+            padding: 10px 20px; /* Padding for text bubble */
             color: #000;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin-top: -10pt;
+            margin-bottom: -10pt;
+            margin-left: -10pt;
+            margin-right: -10pt;
         }
-        .sample-image {
-            display: inline-block; /* Display images inline */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
-            color: black;
-            cursor: pointer; /* Change cursor to pointer */
-            width: 2in; /* Set width to 2 inches */
+        }
+        .gallery-item {
+            position: relative;
+            margin: 10px;
+            width: 200px;
+            height: 280px;
+            overflow: visible;
+            border-radius: 10px;
+        }
+        .gallery-item:hover .description {
+            display: block;
         }
         .sample-image img {
-            max-width: 100%; /* Ensure image doesn't exceed container width */
-            height: auto; /* Maintain aspect ratio */
-            display: block; /* Make image behave like a block element */
+            max-width: 100%;
+            max-height: 100%;
+            transition: transform 0.3s ease-in-out;
         }
-        .title-list {
-            text-align: left;
-            margin-top: 20px;
-            color: black;
-            list-style: none;
+        .sample-image:hover img {
+            transform: scale(1.1);
         }
-        .title-list li {
-            cursor: pointer;
-            margin-bottom: 20px;
-            border-bottom: 1px dotted black;
+        .description {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            overflow: auto;
+            z-index: 1;
+            color: black; /* Set text color to black */
         }
-        .title-list li:hover {
-            text-decoration: underline;
+        .description p {
+            margin: 0;
+
+        } .free-resources {
+            display: none; /* Initially hide the free resources text */
+        }
+
+        /* Show the free resources text when its parent is hovered over */
+        .gallery:hover .free-resources {
+            display: inline-block;
         }
     </style>
 </head>
@@ -108,47 +135,260 @@
         <a href="mailboxarchive.html">mailbox archive</a>
     </nav>
     <h2 style="color: black;">resource archive</h2>
-    <ul class="title-list">
-        <li onclick="toggleDescription('adult_children')">Adult Children of Emotionally Immature Parents</li>
-        <li onclick="toggleDescription('all_about_love')">All About Love</li>
-        <li onclick="toggleDescription('attached')">Attached: The New Science of Adult Attachment and How It Can Help YouFind - and Keep - Love</li>
-        <li onclick="toggleDescription('attachment')">Attachment: 60 Trauma-Informed Assessment and Treatment Interventions Across the Lifespan</li>
-        <li onclick="toggleDescription('concerning_my_daughter')">Concerning My Daughter</li>
-        <li onclick="toggleDescription('crying_in_h_mart')">Crying in H Mart</li>
-        <li onclick="toggleDescription('everything_everywhere_all_at_once')">Everything Everywhere All at Once</li>
-        <li onclick="toggleDescription('girlhood')">Girlhood</li>
-        <li onclick="toggleDescription('im_glad_my_mom_died')">I’m glad my mom died</li>
-        <li onclick="toggleDescription('it_didnt_start_with_you')">It Didn't Start with You: How Inherited Family Trauma Shapes Who We Are and How to End the Cycle</li>
-        <li onclick="toggleDescription('ladybird')">LADYBIRD</li>
-        <li onclick="toggleDescription('mamma_mia')">Mamma Mia!</li>
-        <li onclick="toggleDescription('mother_a_cradle_to_hold_me')">Mother A Cradle to Hold Me</li>
-        <li onclick="toggleDescription('mother_hunger')">Mother Hunger</li>
-        <li onclick="toggleDescription('mom_and_me_and_mom')">Mom & Me & Mom</li>
-        <li onclick="toggleDescription('my_body')">My Body</li>
-        <li onclick="toggleDescription('my_grandmothers_hands')">My Grandmother's Hands: Racialized Trauma and the Pathway to Mending Our Hearts and Bodies</li>
-        <li onclick="toggleDescription('my_mothers_body')">My Mother's Body</li>
-        <li onclick="toggleDescription('our_mothers_ourselves')">Our Mothers, Ourselves: How Understanding Your Mother’s Influence Can Set You on a Path to Better Life</li>
-        <li onclick="toggleDescription('radical_acceptance')">Radical Acceptance</li>
-        <li onclick="toggleDescription('the_book_you_wish_your_parents_had_read')">The Book You Wish Your Parents Had Read (and Your Children Will Be Glad That You Did)</li>
-        <li onclick="toggleDescription('the_body_keeps_the_score')">The Body Keeps the Score</li>
-        <li onclick="toggleDescription('the_dialectical_behavior_therapy_skills_workbook')">The Dialectical Behavior Therapy Skills Workbook: Practical DBT Exercises for Learning Mindfulness, Interpersonal Effectiveness, Emotion Regulation, and Distress Tolerance</li>
-        <li onclick="toggleDescription('the_highly_sensitive_person')">The Highly Sensitive Person</li>
-        <li onclick="toggleDescription('walking_on_eggshells')">Walking on Eggshells: Navigating the Delicate Relationship Between Adult Children and Parents</li>
-        <li onclick="toggleDescription('what_my_mother_and_i_dont_talk_about')">What My Mother and I Don’t Talk About: Fifteen Writers Break the Silence</li>
-        <li onclick="toggleDescription('women_who_think_too_much')">Women Who Think Too Much: How to Break Free of Over-thinking and Reclaim Your Life</li>
-        <li onclick="toggleDescription('youre_not_listening')">You’re Not Listening: What You’re Missing and Why it Matters</li>
-        <!-- Add other titles here -->
-    </ul>
+   <div class="gallery">
+        <div class="free-resources">
+            <a href="free.html" style="color: rgb(107, 92, 99); text-decoration: none;">(shhhh! click me for free resources)</a>
+        </div>
+    <div class="gallery">
+        <!-- Images 1-4 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="1.jpeg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"Adult Children of Emotionally Immature Parents" delves into the complex dynamics faced by individuals raised by caregivers who lacked emotional maturity. Exploring themes of unresolved childhood trauma, the book illuminates how these experiences shape adult relationships and self-perception. Through insightful narratives and practical guidance, it empowers readers to navigate healing and cultivate healthier connections.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="2.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"Bell Hooks' 'All About Love: New Visions' presents a compelling exploration of love in contemporary society, delving into its complexities and offering fresh insights. Through a blend of personal anecdotes, cultural analysis, and feminist perspectives, Hooks challenges conventional notions of love and advocates for its transformative power. This influential work invites readers to reconsider their understanding of love and its role in fostering meaningful connections and social change."
+                </p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="3.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"Attached: The New Science of Adult Attachment and How It Can Help You Find - and Keep - Love" by Amir Levine and Rachel Heller offers a groundbreaking perspective on adult attachment styles and their impact on relationships. Drawing from cutting-edge psychological research, the book provides practical insights and strategies to understand your attachment style and improve your romantic connections. With clarity and empathy, Levine and Heller empower readers to navigate the complexities of love and cultivate healthier, more fulfilling relationships..</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="4.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <!-- Repeat for images 2-4 -->
+    </div>
+    <div class="gallery">
+        <!-- Images 5-8 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="5.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="6.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="7.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="8.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+            <!-- Repeat for images 5-8 -->
+        </div>
+    </div>
+    <div class="gallery">
+        <!-- Images 9-12 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="9.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="10.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="11.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="12.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+    <div class="gallery">
+        <!-- Images 13-16 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="13.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="14.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="15.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="16.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+    <div class="gallery">
+        <!-- Images 17-20 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="17.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="18.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="19.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="20.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+    </div>
+    <div class="gallery">
+        <!-- Images 21-24 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="21.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="22.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="23.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="24.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+    </div>
+    <div class="gallery">
+        <!-- Images 25-28 -->
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="25.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="26.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="27.jpeg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="sample-image">
+                <img src="28.jpg" alt="Image Placeholder">
+            </div>
+            <div class="description">
+                <p>"description.</p>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         © 2024 the MotherBoard archive
     </footer>
-
-    <script>
-        function toggleDescription(id) {
-            var description = document.getElementById(id);
-            description.style.display = description.style.display === "none" ? "block" : "none";
-        }
-    </script>
-
 </body>
 </html>
