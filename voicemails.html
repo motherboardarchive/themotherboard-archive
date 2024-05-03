@@ -66,24 +66,14 @@
             margin-top: 0;
             margin-bottom: 0;
         }
-        .transcript-btn {
-            margin-top: 10px; /* Adjust spacing */
-            color: black; /* Black text */
-            background-color: white; /* White background */
-            border: 1pt solid black; /* Black border */
-            border-radius: 30px; /* Rounded corners */
-            padding: 10px; /* Padding inside the text bubble */
-            display: inline-block; /* Make the text bubble inline */
-            cursor: pointer; /* Pointer cursor */
-        }
         .transcript-desc {
             margin-top: 10px; /* Adjust spacing */
             color: black; /* Black text */
-            background-color: white; /* White background */
+            background-color: rgba(255, 255, 255, 0); /* White background */
             border: 1pt solid black; /* Black border */
             border-radius: 30px; /* Rounded corners */
             padding: 10px; /* Padding inside the text bubble */
-            display: none; /* Initially hidden */
+            display: block; /* Visible by default */
         }
         .submenu {
             margin-top: 10px; /* Adjust spacing */
@@ -109,8 +99,8 @@
     <div class="submenu">
         <a href="voicemails.html">voicemails</a>
         <a href="textsmessages.html">texts</a>
-        <a href="survey.html">survey responses</a>
-        <a href="tiktokvideos.html">tiktoks</a>
+        <a href="https://forms.gle/4Tm5Uv39qXT1uCybA">survey</a>
+        <a href="tiktoks.html">tiktoks</a>
     </div>
 
     <h2 style="color: black;">mailbox archive</h2>
@@ -120,8 +110,7 @@
             <source src="Voicemail_159_41224.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <button class="transcript-btn" onclick="toggleTranscript('transcript1')">Transcript</button>
-        <p id="transcript1" class="transcript-desc">(Submitted Apr 12, 2024, 1:59 P.M.) Transcript: "I think this is how you know you send message but I wish that my mom knew that she is the only person on planet Earth was capable of making me feel. That I am not even more full of enough. I will never be enough I could never be enough. And I just want to ask her. What about me makes me not good enough. What about me? Makes you not want to try to make me feel good enough. and why do you have so much resentment for the life that you so badly wanted to create and why? Is your life before me? Why? Damage Done unto you in the life before me Why do I have to bear the consequences? Why do you not acknowledge the consequences? That are affected me. Why do you not acknowledge the hurt or pain or resentment that you have caused me? Why have you not acknowledged a single things done to me? Why have you been so nasty and yet to see how nasty you can be? Thanks."</p>
+        <p class="transcript-desc">(Submitted Apr 12, 2024, 1:59 P.M.) Transcript: "I think this is how you know you send message but I wish that my mom knew that she is the only person on planet Earth was capable of making me feel. That I am not even more full of enough. I will never be enough I could never be enough. And I just want to ask her. What about me makes me not good enough. What about me? Makes you not want to try to make me feel good enough. and why do you have so much resentment for the life that you so badly wanted to create and why? Is your life before me? Why? Damage Done unto you in the life before me Why do I have to bear the consequences? Why do you not acknowledge the consequences? That are affected me. Why do you not acknowledge the hurt or pain or resentment that you have caused me? Why have you not acknowledged a single things done to me? Why have you been so nasty and yet to see how nasty you can be? Thanks."</p>
     </div>
 
     <div>
@@ -129,8 +118,7 @@
             <source src="Voicemail_204_41224.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <button class="transcript-btn" onclick="toggleTranscript('transcript2')">Transcript</button>
-        <p id="transcript2" class="transcript-desc">(Submitted Apr 12, 2024, 2:04 P.M.) Transcript: "I wish I could tell my mom. That I left not because I don't love her. but because I had to love myself more."</p>
+        <p class="transcript-desc">(Submitted Apr 12, 2024, 2:04 P.M.) Transcript: "I wish I could tell my mom. That I left not because I don't love her. but because I had to love myself more."</p>
     </div>
 
     <div>
@@ -138,8 +126,7 @@
             <source src="Voicemail_215_41224.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        <button class="transcript-btn" onclick="toggleTranscript('transcript3')">Transcript</button>
-        <p id="transcript3" class="transcript-desc">(Submitted Apr 12, 2024, 2:15 P.M.) Transcript: "I wish I could tell you you only have one life and one set of kids. And you need to leave that man behind if you want to experience either of those things while you're still here with us."</p>
+        <p class="transcript-desc">(Submitted Apr 12, 2024, 2:15 P.M.) Transcript: "I wish I could tell you you only have one life and one set of kids. And you need to leave that man behind if you want to experience either of those things while you're still here with us."</p>
     </div>
 
     <div>
@@ -269,12 +256,6 @@
         © 2024 the MotherBoard archive
     </footer>
 
-    <script>
-        function toggleTranscript(transcriptId) {
-            var transcript = document.getElementById(transcriptId);
-            transcript.style.display = transcript.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
 
 </body>
 </html>

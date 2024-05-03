@@ -65,12 +65,33 @@
             color: #000;
             margin-top: 20px;
         }
+        .justified {
+            text-align: justify;
+            margin-top: 40px;
+            padding-left: 50px; /* Space for the video */
+            padding-right: 170px; /* Adjusted to maintain spacing */
+            color: black;
+        }
+        .video-container {
+            position: relative;
+            margin: 0 auto; /* Center horizontally */
+            width: 300px; /* Adjust width of video container */
+            height: 200px; /* Adjust height of video container */
+            overflow: hidden;
+            z-index: -1;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1 class="text-bubble">the MotherBoard archive</h1>
     </header>
+      
     
     <nav>
         <a href="ABOUT.html">about</a>
@@ -78,7 +99,16 @@
         <a href="sophie.html">quiz</a>
         <a href="mailboxarchive.html">mailbox archive</a>
     </nav>
+
     <h2 style="color: black;">about the project</h2>
+    <div class="video-container">
+        <video autoplay loop>
+            <source src="aboutvideo.MOV" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <h4 class="justified">My synthesis project focuses on the complexities of daughterhood and mother/daughter relationships. The MotherBoard Archive is a curated library of resources and media centered around navigating complex mother/daughter relationships, girlhood, self healing, and healing relational patterns. The digital archive functions as a gentle guide; a recipe for healing and self reflection. The MotherBoard archive can be engaged with purely as a resource library, or (by means of an interactive personality quiz function) as a way to generate a personalized list of resource and media recommendations based on the user’s specific need within this broader topic. This project is also about finding community within the complexities of these relationships. Using a handful of public engagement prompts I have also been gathering anonymous survey responses, voicemails, and text messages to help me understand where communication struggles exist within the context of mother/daughter or parent/child relationships. The user is also able to browse through a growing selection of these anonymous voicemail and text submissions.</h4>
     <footer>
         © 2024 the MotherBoard archive
     </footer>

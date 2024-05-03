@@ -1,354 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Website</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
 
-    <style>
-      @font-face {
-        font-family: "Inconsolata";
-        src: url("Inconsolata-VariableFont_wdth,wght.ttf") format("truetype");
-      }
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-      html {
-        height: 100%;
-      }
+    h1 {
+      margin-bottom: 20px;
+    }
 
-      body {
-        background-color: #ebddf7;
-        text-align: center;
-        font-family: "Inconsolata", monospace;
-        color: black;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
+    #choices {
+      margin-top: 20px;
+    }
 
-      header,
-      footer {
-        background-color: #ffa8c8;
-        padding: 10px 0;
-        color: black;
-        border-bottom: 3pt solid #aa99d0;
-      }
+    button {
+      margin-top: 20px;
+    }
 
-      nav a,
-      button,
-      .menu-button {
-        background-color: #ffffff;
-        color: black;
-        padding: 10px 20px;
-        border: 1pt solid black;
-        border-radius: 30px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 20px;
-        text-decoration: none;
-      }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz</h1>
+    <div id="question"></div>
+    <div id="choices"></div>
+    <button id="submit">Submit Answer</button>
+    <div id="result"></div>
+    <div id="image-recommendations"></div>
+  </div>
 
-      nav a:hover,
-      .menu-button:hover {
-        background-color: #ec95be;
-      }
+  <script>
+    const questions = [
+      {
+        question: "do you identify as a woman?",
+        choices: [{ text: "yes", code: "01" }, { text: "no", code: "02" }]
+      },
+      {
+        question: "do you enjoy coming-of-age stories?",
+        choices: [{ text: "yes", code: "03" }, { text: "no", code: "04" }]
+      },
+      {
+        question: "are you dealing with the loss of a mother or mother figure?",
+        choices: [{ text: "yes", code: "05" }, { text: "no", code: "06" }]
+      },
+      {
+        question: "do you struggle coming to terms with the way things are in your current life regarding your relationship with your parent(s)/child?",
+        choices: [{ text: "yes", code: "07" }, { text: "no", code: "08" }]
+      },
+      {
+        question: "are you curious to reflect on how your parental relationships affect your relationships with others?",
+        choices: [{ text: "yes", code: "09" }, { text: "no", code: "10" }]
+      },
+      {
+        question: "would you classify your relationship with your parent(s) as particularly complex and tumultuous?",
+        choices: [{ text: "yes", code: "11" }, { text: "no", code: "12" }]
+      },
+      {
+        question: "does media that contains spiritual or religious perspectives turn you off?",
+        choices: [{ text: "yes", code: "13" }, { text: "no", code: "14" }]
+      },{
+        question: "growing up, do you feel as though you dealt with having to “walk on eggshells” or that the success of your relationship between you and your guardians depended on how “good” you were?",
+        choices: [{ text: "yes", code: "15" }, { text: "no", code: "16" }]
+      },{
+        question: "have you ever dealt with moving away from your mother/family? (leaving home for school, moving states, etc?)",
+        choices: [{ text: "yes", code: "17" }, { text: "no", code: "18" }]
+      },
+      {
+        question: "is improving your communication with your mother important to you?",
+        choices: [{ text: "yes", code: "19" }, { text: "n/a", code: "02" }]
+      },
+      
+      // Add more questions as needed
+    ];
 
-      .quiz-container {
-        max-width: 600px;
-        margin: 0 auto;
-        text-align: center;
-      }
+    const allRecommendations = [
+      { url: "1.jpeg", criteria: ["01", "02", "03", "04"] },
+      { url: "2.jpg", criteria: ["01", "06"] },
+      { url: "3.jpg", criteria: ["01", "06"] },
+      { url: "4.jpg", criteria: ["01", "08"] },
+      { url: "5.jpg", criteria: ["01", "08"] },
+      { url: "6.jpg", criteria: ["01", "08"] },
+      { url: "7.jpg", criteria: ["01", "08"] },
+      { url: "8.jpg", criteria: ["01", "08"] },
+      { url: "9.jpg", criteria: ["01", "08"] },
+      { url: "10.jpg", criteria: ["01", "08"] },
+      { url: "11.jpg", criteria: ["01", "08"] },
+      { url: "12.jpg", criteria: ["01", "08"] },
+      { url: "13.jpg", criteria: ["01", "08"] },
+      { url: "14.jpg", criteria: ["01", "08"] },
+      { url: "15.jpg", criteria: ["01", "08"] },
+      { url: "16.jpg", criteria: ["01", "08"] },
+      { url: "17.jpg", criteria: ["01", "08"] },
+      { url: "18.jpg", criteria: ["01", "08"] },
+      { url: "19.jpg", criteria: ["01", "08"] },
+      { url: "20.jpg", criteria: ["01", "08"] },
+      { url: "21.jpg", criteria: ["01", "08"] },
+      { url: "22.jpg", criteria: ["01", "08"] },
+      { url: "23.jpg", criteria: ["01", "08"] },
+      { url: "24.jpg", criteria: ["01", "08"] },
+      { url: "25.jpg", criteria: ["01", "08"] },
+      { url: "26.jpg", criteria: ["01", "08"] },
+      { url: "27.jpeg", criteria: ["01", "08"] },
+      { url: "28.jpg", criteria: ["01", "08"] },
+      // Add more image URLs with their criteria
+    ];
 
-      #choices button {
-        margin-top: 10px; /* Adjusting only button specific in choices for clarity */
-      }
+    let currentQuestion = 0;
+    let answers = [];
+    let currentRecommendations = allRecommendations.slice(); // Start with all recommendations
 
-      .text-bubble {
-        display: inline-block;
-        background-color: #ffffff;
-        border: 1pt solid black;
-        padding: 10px 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1 class="text-bubble">the MotherBoard archive</h1>
-    </header>
+    const questionElement = document.getElementById('question');
+    const choicesElement = document.getElementById('choices');
+    const resultElement = document.getElementById('result');
+    const submitButton = document.getElementById('submit');
 
-    <nav>
-      <a href="ABOUT.html">about</a>
-      <a href="resourcearchive.html">resource archive</a>
-      <a href="sophie.html">quiz</a>
-      <a href="mailboxarchive.html">mailbox archive</a>
-    </nav>
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      questionElement.textContent = question.question;
+      choicesElement.innerHTML = '';
+      question.choices.forEach(choice => {
+        const button = document.createElement('button');
+        button.textContent = choice.text;
+        button.addEventListener('click', () => answerQuestion(choice.code));
+        choicesElement.appendChild(button);
+      });
+    }
 
-    <div class="quiz-container">
-      <h1>Quiz</h1>
-      <div id="question"></div>
-      <div id="choices"></div>
-      <div id="result"></div>
-      <div id="image-recommendations"></div>
-    </div>
-
-    <script>
-      const questions = [
-        {
-          question: "do you identify as a woman?",
-          choices: [
-            { text: "yes", code: "01" },
-            { text: "no", code: "02" },
-          ],
-        },
-        {
-          question: "do you enjoy coming-of-age stories?",
-          choices: [
-            { text: "yes", code: "03" },
-            { text: "no", code: "04" },
-          ],
-        },
-        {
-          question:
-           "is improving communication with your mother (or child) important to you?",
-          choices: [
-            { text: "yes", code: "05" },
-            { text: "no", code: "06" },
-          ],
-        },
-        {
-          question:
-            "do you struggle coming to terms with the way things are in your current life regarding your relationship with your parent(s) (or your child)?",
-          choices: [
-            { text: "yes", code: "07" },
-            { text: "no", code: "08" },
-          ],
-        },
-        {
-          question:
-            "are you curious to reflect on how your parental relationships affect your relationships with others?",
-          choices: [
-            { text: "yes", code: "09" },
-            { text: "no", code: "10" },
-          ],
-        },
-        {
-          question:
-            "would you classify your relationship with your parent(s) as particularly complex and tumultuous?",
-          choices: [
-            { text: "yes", code: "11" },
-            { text: "no", code: "12" },
-          ],
-        },
-        {
-          question:
-            "does media that contains spiritual or religious perspectives turn you off?",
-          choices: [
-            { text: "yes", code: "13" },
-            { text: "no", code: "14" },
-          ],
-        },
-        {
-          question:
-            "growing up, do you feel as though you dealt with having to “walk on eggshells” or that the success of your relationship between you and your guardians depended on how “good” you were?",
-          choices: [
-            { text: "yes", code: "15" },
-            { text: "no", code: "16" },
-          ],
-        },
-        {
-          question:
-            "have you ever dealt with moving away from your mother/family? (leaving home for school, moving states, etc?)",
-          choices: [
-            { text: "yes", code: "17" },
-            { text: "no", code: "18" },
-          ],
-        },
-        {
-          question:
-          "do you struggle with feeling accepted for your identity or who you are attracted to?",
-          choices: [
-            { text: "yes", code: "19" },
-            { text: "no", code: "20" },
-          ],
-        },
-
-        {
-          question:
-          "are you dealing with the loss of a mother or mother figure?",
-          choices: [
-            { text: "yes", code: "21" },
-            { text: "no", code: "22" },
-          ],
-        },
-
-        // Add more questions as needed
-      ];
-
-      const allRecommendations = [
-        { url: "1.jpeg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20","21", "22", "23", "24"] },
-        { url: "2.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,", "20","21", "22", "23", "24"] },
-        { url: "3.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,", "20","21", "22", "23", "24"] },
-        { url: "4.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20","21", "22", "23", "24"] },
-        { url: "5.jpg", criteria: ["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19","21", "22", "23", "24"] },
-        { url: "6.jpg", criteria: ["01", "02", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20","21", "22", "23", "24"] },
-        { url: "7.jpg", criteria: ["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20","21", "22", "23", "24"] },
-        { url: "8.jpg", criteria: ["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20","21", "22", "23", "24"] },
-        { url: "9.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "10.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "11.jpg", criteria: ["01", "02", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "12.jpg", criteria:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "13.jpg", criteria:["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "14.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "15.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "16.jpg", criteria: ["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "17.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "18.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "19.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "20.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "21.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "22.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "23.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "24.jpg", criteria:["01", "02", "03", "04", "05", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "25.jpg", criteria:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "17", "18", "19,","20"] },
-        { url: "26.jpg", criteria: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "27.jpeg", criteria: ["01", "03", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        { url: "28.jpg", criteria: ["01", "02", "03", "04", "05", "07", "08", "09", "10", "11", "12", "13", "14", "15","16", "17", "18", "19,","20"] },
-        // Add more image URLs with their criteria
-      ];
-      let currentQuestion = 0;
-      let answers = [];
-      let currentRecommendations = allRecommendations.slice();
-
-      const questionElement = document.getElementById("question");
-      const choicesElement = document.getElementById("choices");
-      const imageContainer = document.getElementById("image-recommendations");
-
-      function init() {
-        displayRecommendations();
-        showQuestion();
-      }
-
-      function displayRecommendations() {
-        imageContainer.innerHTML = "";
-        currentRecommendations.forEach((rec) => {
-          const img = document.createElement("img");
-          img.src = rec.url;
-          img.alt = "Recommendation";
-          img.style.height = "200px";
-          img.style.margin = "10px";
-          imageContainer.appendChild(img);
-        });
-      }
-
-      function showQuestion() {
-        if (currentQuestion < questions.length) {
-          const question = questions[currentQuestion];
-          questionElement.textContent = question.question;
-          choicesElement.innerHTML = "";
-          question.choices.forEach((choice) => {
-            const button = document.createElement("button");
-            button.textContent = choice.text;
-            button.addEventListener("click", () => answerQuestion(choice.code));
-            button.classList.add("menu-button");
-            choicesElement.appendChild(button);
-          });
-        } else {
-          questionElement.textContent = "Quiz Completed!";
-          choicesElement.innerHTML = "";
-        }
-      }
-
-      function answerQuestion(choiceCode) {
-        answers.push(choiceCode);
-        currentRecommendations = currentRecommendations.filter((rec) =>
-          rec.criteria.includes(choiceCode)
-        );
-        displayRecommendations();
+    function answerQuestion(choiceCode) {
+      answers.push(choiceCode);
+      filterRecommendations();
+      if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         showQuestion();
+      } else {
+        showResult();
       }
+    }
 
-      init();
-    </script>
+    function filterRecommendations() {
+      currentRecommendations = currentRecommendations.filter(rec =>
+        rec.criteria.slice(0, answers.length).includes(answers[answers.length - 1])
+      );
+      updateResultDisplay();
+    }
 
-    <style>
-      @font-face {
-        font-family: "Inconsolata";
-        src: url("Inconsolata-VariableFont_wdth,wght.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-      html {
-        height: 100%; /* Ensure the html element spans full height */
-      }
-      body {
-        background-color: #ebddf7; /* Very pale lilac background */
-        text-align: center; /* Center text */
-        font-family: "Inconsolata", monospace; /* Use Inconsolata as the primary font */
-        color: rgb(0, 0, 0); /* Make all text white */
-        margin: 0; /* Remove default margin */
-        padding: 0; /* Remove default padding */
-        display: flex; /* Use flexbox layout */
-        flex-direction: column; /* Stack elements vertically */
-        min-height: 100vh; /* Minimum height of viewport */
-      }
-      header {
-        background-color: #ffa8c8; /* Pastel purple background */
-        padding: 0px 0; /* Padding for spacing */
-        color: #f1acc2; /* Black text for visibility */
-        border-bottom: 3pt solid #aa99d0; /* Black bottom border */
-      }
-      footer {
-        background-color: #ffa8c8; /* Pastel pink background */
-        padding: 10px 0; /* Padding for spacing */
-        color: #000; /* Black text for visibility */
-        margin-top: auto; /* Push footer to the bottom */
-      }
-      nav {
-        margin-top: 20px; /* Adjust if necessary */
-      }
-      a {
-        color: #000; /* Dark text for better visibility */
-        text-decoration: none; /* No underline */
-        margin: 0 10px; /* Spacing around links */
-        display: inline-block;
-        background-color: #ffffff; /* White background */
-        color: black; /* Black text */
-        padding: 10px 10px; /* Padding inside the button */
-        border: 1pt solid black; /* Black border */
-        border-radius: 30px; /* Rounded corners */
-        cursor: pointer; /* Pointer cursor on hover */
-        font-size: 16px; /* Larger font size */
-        margin-top: 20px; /* Margin above the button for spacing */
-      }
-      a:hover {
-        background-color: #ec95be; /* Lighter pink on hover */
-      }
-      .text-bubble {
-        display: inline-block;
-        background-color: #ffffff;
-        border: 1pt solid black; /* Added black border */
-        border-radius: 30px;
-        padding: 10px 20px;
-        color: #000;
-        margin-top: 20px;
-      }
-      .menu-button {
-        background-color: #ffffff; /* White background */
-        color: black; /* Black text */
-        padding: 10px 10px; /* Padding inside the button */
-        border: 1pt solid black; /* Black border */
-        border-radius: 30px; /* Rounded corners */
-        cursor: pointer; /* Pointer cursor on hover */
-        font-size: 16px; /* Larger font size */
-        margin-top: 20px; /* Margin above the button for spacing */
-      }
-      .menu-button:hover {
-        background-color: #ec95be; /* Lighter pink on hover */
-      }
-    </style>
+    function updateResultDisplay() {
+      const imageContainer = document.getElementById('image-recommendations');
+      imageContainer.innerHTML = ''; // Clear previous images
+      currentRecommendations.forEach(rec => {
+        const img = document.createElement('img');
+        img.src = rec.url;
+        img.alt = 'Recommendation';
+        img.style.height = '200px'; // Set image size as needed
+        img.style.margin = '10px';
+        imageContainer.appendChild(img);
+      });
+    }
 
-    <footer>© 2024 the MotherBoard archive</footer>
-  </body>
+    function showResult() {
+      updateResultDisplay(); // Show final recommendations
+    }
+
+    submitButton.addEventListener('click', () => answerQuestion(questions[currentQuestion].choices[0].code));
+    showQuestion();
+  </script>
+</body>
 </html>
